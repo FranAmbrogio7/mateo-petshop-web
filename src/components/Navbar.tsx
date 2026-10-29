@@ -3,6 +3,8 @@ import Link from "next/link";
 import Logo from "@/components/Logo";
 import ThemeToggle from "@/components/ThemeToggle";
 
+import MenuUsuario from "@/components/MenuUsuario";
+
 const enlaces = [
     { href: "/productos", texto: "Productos" },
     { href: "/servicios", texto: "Servicios" },
@@ -25,6 +27,7 @@ export default function Navbar() {
                         </Link>
                     ))}
                     <ThemeToggle />
+                    <MenuUsuario />
                 </div>
             </nav>
         </header>
