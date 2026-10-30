@@ -48,3 +48,17 @@ export type Servicio = {
     especies: number[];
     activo: boolean;
 };
+
+/** Listado de mascotas: la especie viene anidada. */
+export type Mascota = {
+    id: number;
+    nombre: string;
+    especie: Especie;
+    raza: string;
+    fecha_nacimiento: string | null;
+    peso_kg: string | null;
+    observaciones: string;
+};
+
+/** Detalle de una mascota: la especie viene como ID. */
+export type MascotaDetalle = Omit<Mascota, "especie"> & { especie: number };

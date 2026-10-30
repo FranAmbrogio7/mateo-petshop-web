@@ -55,3 +55,19 @@ const EMOJI_CATEGORIA: Record<string, string> = {
 export function emojiCategoria(nombre?: string): string {
     return (nombre && EMOJI_CATEGORIA[nombre]) || "🐾";
 }
+
+
+/** "2021-03-10" → "3 años", "5 meses" o "Menos de un mes". */
+export function calcularEdad(fecha: string | null, hoy: Date = new Date()): string | null {
+    if (!fecha) return null;
+    const nacimiento = new Date(`${fecha}T00:00:00`);
+    if (Number.isNaN(nacimiento.getTime())) return null;
+
+    let meses = (hoy.getFullYear() - nacimiento.getFullYear()) * 12 + (hoy.getMonth() - nacimiento.getMonth());
+    if (hoy.getDate() < nacimiento.getDate()) meses -= 1;
+
+    if (meses < 1) return "Menos de un mes";
+    if (meses < 12) return meses === 1 ? "1 mes" : `${meses} meses`;
+    const anios = Math.floor(meses / 12);
+    return anios === 1 ? "1 año" : `${anios} años`;
+}
