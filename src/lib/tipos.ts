@@ -62,3 +62,17 @@ export type Mascota = {
 
 /** Detalle de una mascota: la especie viene como ID. */
 export type MascotaDetalle = Omit<Mascota, "especie"> & { especie: number };
+
+
+export type EstadoTurno = "pendiente" | "confirmado" | "realizado" | "cancelado";
+
+/** Listado de turnos: mascota (con su especie) y servicio vienen anidados. */
+export type Turno = {
+    id: number;
+    mascota: Mascota;
+    servicio: Servicio;
+    fecha_hora: string;
+    estado: EstadoTurno;
+    notas: string;
+    creado: string;
+};

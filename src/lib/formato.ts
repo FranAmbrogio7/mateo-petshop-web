@@ -71,3 +71,19 @@ export function calcularEdad(fecha: string | null, hoy: Date = new Date()): stri
     const anios = Math.floor(meses / 12);
     return anios === 1 ? "1 año" : `${anios} años`;
 }
+
+const fechaHora = new Intl.DateTimeFormat("es-AR", {
+    weekday: "long",
+    day: "numeric",
+    month: "long",
+    hour: "2-digit",
+    minute: "2-digit",
+    hourCycle: "h23",
+    timeZone: "America/Argentina/Buenos_Aires",
+});
+
+/** "2026-11-10T13:00:00Z" → "martes, 10 de noviembre, 10:00" (hora argentina) */
+export function formatearFechaHora(iso: string): string {
+    const fecha = new Date(iso);
+    return Number.isNaN(fecha.getTime()) ? "—" : fechaHora.format(fecha);
+}
