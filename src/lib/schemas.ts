@@ -49,3 +49,29 @@ export function aPayloadMascota(datos: MascotaDatos) {
         observaciones: datos.observaciones,
     };
 }
+
+
+const HORA = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+/** Junta fecha y hora en un ISO con la zona horaria de Argentina (UTC-3). */
+export function aFechaHoraISO(fecha: string, hora: string): string {
+    return `${fecha}T${hora}:00-03:00`;
+}
+
+export const turnoSchema = z
+    .object({
+        mascota: z.string().min(1, "Elegí una mascota"),
+        servicio: z.string().min(1, "Elegí un servicio"),
+        fecha: z.string().regex(FECHA, "Elegí una fecha"),
+        hora: z
+            .string()
+            .regex(HORA, "Elegí un horario")
+            .refine((valor) => valor >= "09:00" && valor <= "18:00", "Atendemos de 9 a 18 h"),
+        notas: z.string().trim().max(300, "Máximo 300 caracteres"),
+    })
+    .refine((datos) => !FECHA.test(datos.fecha) || !HORA.test(datos.hora) || new Date(aFechaHoraISO(datos.fecha, datos.hora)) > new Date(), {
+        message: "El turno tiene que ser en el futuro",
+        path: ["fecha"],
+    });
+
+export type TurnoDatos = z.infer<typeof turnoSchema>;
