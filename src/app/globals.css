@@ -1,26 +1,47 @@
 @import "tailwindcss";
 
+/* Activa las clases dark: cuando <html> tiene la clase "dark" (la pone ThemeContext) */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Paleta de Mateo Pet Shop: la misma que la página de bienvenida de la API */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --marca: #2f7d6d;
+  --marca-oscuro: #245f53;
+  --acento: #f2a541;
+  --fondo: #fbf7f1;
+  --superficie: #ffffff;
+  --texto: #24302e;
+  --suave: #5d6b68;
+  --borde: #e6e0d6;
+  --hero: #2f7d6d;
+}
+
+.dark {
+  --marca: #4fb3a0;
+  --marca-oscuro: #8fd3c5;
+  --acento: #f5b866;
+  --fondo: #121816;
+  --superficie: #1c2421;
+  --texto: #e8efed;
+  --suave: #a3b3af;
+  --borde: #2c3834;
+  --hero: #1f4d44;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-marca: var(--marca);
+  --color-marca-oscuro: var(--marca-oscuro);
+  --color-acento: var(--acento);
+  --color-fondo: var(--fondo);
+  --color-superficie: var(--superficie);
+  --color-texto: var(--texto);
+  --color-suave: var(--suave);
+  --color-borde: var(--borde);
+  --color-hero: var(--hero);
+  --font-sans: var(--font-nunito);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--fondo);
+  color: var(--texto);
 }
